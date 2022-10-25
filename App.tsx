@@ -1,9 +1,27 @@
-import { StyleSheet, Text, View } from 'react-native';
+// ! IMPORTS
+import React from 'react';
 
-export default function App() {
+// ! <-- STYLING -->
+import tw from 'twrnc';
+
+// ! <-- NAVIGATION -->
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+// ! <-- COMPONENTS -->
+import RootNavigator from './navigator/RootNavigator';
+
+
+const Stack = createNativeStackNavigator();
+
+const App = () => {
   return (
-    <View>
-      <Text>sheesh</Text>
-    </View>
+    <NavigationContainer>
+      <RootNavigator />
+    </NavigationContainer>
   );
 }
+  
+
+export default App;
+
