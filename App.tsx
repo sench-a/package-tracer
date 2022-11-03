@@ -1,27 +1,32 @@
 // ! IMPORTS
 import React from 'react';
 
-// ! <-- STYLING -->
-import tw from 'twrnc';
-
 // ! <-- NAVIGATION -->
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // ! <-- COMPONENTS -->
 import RootNavigator from './navigator/RootNavigator';
 
+// ! <-- APOLLO CLIENT -->
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
-const Stack = createNativeStackNavigator();
+
+
+const client = new ApolloClient({
+  uri: "http://localhost:5001/api/eponymous-kudu",
+  cache: new InMemoryCache(),
+});
+
 
 const App = () => {
   return (
     <NavigationContainer>
-      <RootNavigator />
+      <ApolloProvider client={client}>
+        <RootNavigator />
+      </ApolloProvider>
     </NavigationContainer>
   );
 }
   
-
 export default App;
 
