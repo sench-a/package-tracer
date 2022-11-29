@@ -6,10 +6,10 @@ type Customer = {
 
 type Order = {
 	customerID: string;
-	Address: string;
-	City: string;
-	Lat: number;
-	Lng: number;
+	address: string;
+	city: string;
+	lat: number;
+	lng: number;
 	orderDate: string;
 	ID: string; 
 };

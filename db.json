@@ -3,31 +3,171 @@
         {
             "ID": "-N6rOmxa7vOOTpZZSllL",
             "name": "Lucas Bill",
-            "emai": "lucal.bill@example.com"
+            "email": "lucal.bill@example.com"
         },
 
         {
             "ID": "-N6rQgCkbLPB1xElUchT",
             "name": "Mandy Jones",
-            "emai": "mandy.jones@example.com"
+            "email": "mandy.jones@example.com"
         },
 
         {
             "ID": "-N6rSJ4xI3_Cq7u58Wh_",
             "name": "Salim Ali",
-            "emai": "salim.ali@example.com"
+            "email": "salim.ali@example.com"
         },
 
         {
             "ID": "-N6rSZB4AoMAwrDnm2jF",
             "name": "Jane Xiu",
-            "emai": "jane.xiu@example.com"
+            "email": "jane.xiu@example.com"
         },
 
         {
             "ID": "-N6rTRzW_JrkHQMdt5QA",
             "name": "John Doe",
-            "emai": "john.doe@example.com"
+            "email": "john.doe@example.com"
+        }
+    ],
+
+    "orders": [
+        {
+            "ID": "1Z881F5V0397269080",
+            "address": "123 Main St, San Francisco",
+            "lat": 37.7749295,
+            "lng": -122.4194155,
+            "orderDate": "2022-08-04",
+            "customerID": "-N6rOmxa7vOOTpZZSllL"
+        },
+
+        {
+            "ID": "1Z4V180W0324616505",
+            "address": "39 Long Beach, Los Angeles",
+            "lat": 33.769327,
+            "lng": -118.192395,
+            "orderDate": "2022-08-01",
+            "customerID": "-N6rQgCkbLPB1xElUchT"
+        },
+
+        {
+            "ID": "1ZCL1F5V0397269023",
+            "address": "Union Square, San Francisco",
+            "lat": 37.78608,
+            "lng": -122.41171,
+            "orderDate": "2022-09-15",
+            "customerID": "-N6rQgCkbLPB1xElUchT"
+        },
+
+        {
+            "ID": "1ZS31F5V039722343",
+            "address": "Santa Clara, San Jose",
+            "lat": 37.350755,
+            "lng": -121.95648,
+            "orderDate": "2022-10-05",
+            "customerID": "-N6rQgCkbLPB1xElUchT"
+        },
+
+        {
+            "ID": "1ZS31F5V0397294994",
+            "address": "Brooklyn, New York",
+            "lat": 40.671505,
+            "lng": -73.941563,
+            "orderDate": "2022-11-01",
+            "customerID": "-N6rQgCkbLPB1xElUchT"
+        }
+    ],
+
+    "orderedItems": [
+        {
+            "orderID": "1Z881F5V0397269080",
+            "item": "iPad Pro 512GB",
+            "price": 1499,
+            "quantity": 1  
+        },
+
+        {
+            "orderID": "1Z4V180W0324616505",
+            "item": "iPad Pro 1TB",
+            "price": 1799,
+            "quantity": 1  
+        },
+
+        {
+            "orderID": "1Z4V180W0324616505",
+            "item": "Screen Protector",
+            "price": 10,
+            "quantity": 1  
+        },
+
+        {
+            "orderID": "1Z4V180W0324616505",
+            "item": "Screen Protector",
+            "price": 10,
+            "quantity": 1  
+        },
+
+        {
+            "orderID": "1Z881F5V0397269080",
+            "item": "Screen Protector",
+            "price": 10,
+            "quantity": 1  
+        },
+
+        {
+            "orderID": "1Z881F5V0397269080",
+            "item": "Evian Water Bottle",
+            "price": 50,
+            "quantity": 5  
+        },
+
+        {
+            "orderID": "1ZCL1F5V0397269023",
+            "item": "iPhone 13 Pro Max",
+            "price": 3200,
+            "quantity": 3  
+        },
+
+        {
+            "orderID": "1ZCL1F5V0397269023",
+            "item": "Screen Protector",
+            "price": 30,
+            "quantity": 3  
+        },
+        
+        {
+            "orderID": "1ZS31F5V039722343",
+            "item": "Xbox One S",
+            "price": 560,
+            "quantity": 1
+        },
+
+        {
+            "orderID": "1ZS31F5V039722343",
+            "item": "Xbox One X",
+            "price": 970,
+            "quantity": 2
+        },
+
+        {
+            "orderID": "1ZS31F5V039722343",
+            "item": "Xbox One S Controllers",
+            "price": 149.99,
+            "quantity": 2
+        },
+
+        {
+            "orderID": "1ZS31F5V0397294994",
+            "item": "LG OLED TV 83in",
+            "price": 2599,
+            "quantity": 1
+        },
+
+        {
+            "orderID": "1ZS31F5V0397294994",
+            "item": "Smart TV Controller",
+            "price": 149.99,
+            "quantity": 1
         }
     ]
 }

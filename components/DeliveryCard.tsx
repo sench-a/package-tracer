@@ -41,7 +41,7 @@ const DeliveryCard = ({ order, screen }: DeliveryCardProps) => {
                 <Text style={tw`text-center font-bold text-lg`}>Order ID: { order.ID }</Text>
                 <Text style={tw`text-center font-bold text-base`}>Ordered: {new Date(order.orderDate).toLocaleDateString('en-gb')}</Text>
                 <Text style={tw`mt-3 text-center font-bold text-lg`}>Shipping address: </Text>
-                <Text style={tw`mb-3 text-center text-base`}>{ order.Address }, { order.City }</Text>
+                <Text style={tw`mb-3 text-center text-base`}>{ order.address }</Text>
 
                 <Divider color="black"/>
 
@@ -67,19 +67,19 @@ const DeliveryCard = ({ order, screen }: DeliveryCardProps) => {
                         style={[tw`w-full mt-5 rounded-xl`, { height: 200 } ]}
                         provider='google'
                         initialRegion={{
-                            latitude: order.Lat,
-                            longitude: order.Lng,
+                            latitude: order.lat,
+                            longitude: order.lng,
                             latitudeDelta: 0.005,
                             longitudeDelta: 0.005,
                         }} 
                         loadingEnabled={true}
                         
                     >
-                        {order.Lat && order.Lng && (
+                        {order.lat && order.lng && (
                             <Marker
                                 coordinate={{
-                                    latitude: order.Lat,
-                                    longitude: order.Lng,
+                                    latitude: order.lat,
+                                    longitude: order.lng,
                                 }}
                             />
                         )}
