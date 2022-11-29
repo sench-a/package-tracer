@@ -1,34 +1,11 @@
-// ! IMPORTS
-
 import React from 'react';
-
-// ! <-- NAVIGATION -->
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-// ! <-- COMPONENTS -->
 import TabNavigator from "./TabNavigator";
-
-// ! <-- SCREENS -->
 import CustomerScreen from '../screens/CustomerScreen';
 import OrderScreen from '../screens/OrderScreen';
 
 
-
-
-export type RootStackParamList = {
-    Main: undefined;
-    Customer: { 
-        userId: string;
-        name: string;
-    };
-    Order: {
-        order: Order;
-    };
-}
-
-
 const RootStack = createNativeStackNavigator<RootStackParamList>();
-
 
 const RootNavigator = () => {
   return (

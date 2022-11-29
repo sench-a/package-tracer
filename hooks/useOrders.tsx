@@ -1,34 +1,17 @@
-import { useEffect, useState } from 'react'
-import { useQuery } from "@apollo/client";
-import { GET_ORDERS } from '../graphql/queries';
+import { useQuery } from "@tanstack/react-query";
+import axios from 'axios';
 
 
-const useOrders = () => {
+const ORDERS = "https://my-json-server.typicode.com/sench-a/package-tracer/orders";
 
-    const { loading, error, data } = useQuery(GET_ORDERS);
-    const [orders, setOrders] = useState<Order[]>([]);
-
-    useEffect(() => {
-        if (!data) return;
-
-        const orders: Order[] = data.getOrders.map(({ value }: OrderResponse) => ({
-            carrier: value.carrier,
-            createdAt: value.createdAt,
-            shippingCost: value.shippingCost,
-            trackingId: value.trackingId,
-            Address: value.Address,
-            City: value.City,
-            Lat: value.Lat,
-            Lng: value.Lng,
-            trackingItems: value.trackingItems,
-        }));
-        
-        setOrders(orders);
-        
-
-    }, [data])
-
-    return { loading, error, orders };
+const fetcher = async (): Promise<Order[]> => {
+    const response = await axios.get(ORDERS);
+    
+    return response.data;
 }
 
-export default useOrders;
+export const useOrders = () => {
+    const { data: orders, isLoading } = useQuery<Order[]>(['orders'], fetcher);
+
+    return { orders, isLoading }; 
+}

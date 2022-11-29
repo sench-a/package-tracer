@@ -1,28 +1,23 @@
-// ! IMPORTS
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
-
-// ! <-- NAVIGATION --> 
 import { useNavigation } from '@react-navigation/native';
-
-// ! <-- STYLING --> 
 import tw from 'twrnc';
 import { Card, Icon } from '@rneui/themed';
+import useOrderedItems from '../hooks/useOrderedItems';
 
 
-
-type Props = {
-    item: Order
+type OrderCardProps = {
+    order: Order;
 }
 
-const OrderCard = ({ item } : Props) => {
-
+const OrderCard = ({ order }: OrderCardProps) => {
     const navigation = useNavigation<OrdersScreenNavigationProp>();
+    const orderedItems = useOrderedItems(order.ID)
 
     return (
         <TouchableOpacity
             onPress={() => {
-                navigation.navigate("Order", { order: item })
+                navigation.navigate("Order", { order: order })
             }}
         >
             <Card containerStyle={[
@@ -41,13 +36,11 @@ const OrderCard = ({ item } : Props) => {
                     <View style={tw`flex-row justify-between`}>
 
                         <View style={tw`flex-col`}>
-                            <Text style={tw`text-lg font-bold`}>Order ID: {item.trackingId}</Text>
-                            <Text style={tw`text-base font-bold`}>Name: {item.trackingItems.customers.name}</Text>
+                            <Text style={tw`text-lg font-bold`}>ID: {order.ID}</Text>
                         </View> 
                         
                         <View style={tw`flex-row items-center mt--1.5`}>
-                            <Text style={tw`font-bold`}>{item.trackingItems.items.length}x</Text>
-
+                            <Text style={tw`font-bold`}>{orderedItems?.length}x</Text>
                             <Icon
                                 name="cart-outline"
                                 type="ionicon"
@@ -58,18 +51,16 @@ const OrderCard = ({ item } : Props) => {
 
                     </View>
                     
-
-                    <View style={tw`flex-row items-end mt-3`}>
+                    <View style={tw`flex-row items-end`}>
 
                         <Icon
                             name="truck"
                             type="feather"
                             style={tw`ml-1 mr-2`}
                         />
-
                         <Text style={tw`font-bold`}>Ordered: </Text>
-                        <Text>{new Date(item.createdAt).toLocaleDateString('en-gb')}</Text>
-                    
+                        <Text>{new Date(order.orderDate).toLocaleDateString('en-gb')}</Text>
+
                     </View>
                     
                 </View>

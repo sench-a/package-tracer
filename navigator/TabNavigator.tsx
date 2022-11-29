@@ -1,25 +1,12 @@
-// ! IMPORTS
-
 import React from 'react';
-
-// ! <-- NAVIGATION -->
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-// ! <-- SCREENS -->
 import CustomersScreen from '../screens/CustomersScreen';
 import OrdersScreen from '../screens/OrdersScreen';
-
-// ! <-- STYLING -->
 import { Icon } from "@rneui/themed";
 
 
 
-export type TabStackParamList = {
-  Customers: undefined;
-  Orders: undefined;
-}
-
-const Tab = createBottomTabNavigator<TabStackParamList>();
+const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
   return (
@@ -40,7 +27,7 @@ const TabNavigator = () => {
     > 
         <Tab.Screen 
           name="Customers" 
-          component={CustomersScreen} 
+          component= {CustomersScreen} 
           options={{ 
             headerShown: false,
             tabBarActiveTintColor: "#59C1CC",

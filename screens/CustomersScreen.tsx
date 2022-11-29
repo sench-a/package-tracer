@@ -1,41 +1,21 @@
-// ! IMPORTS
-
 import React, { useRef, useState } from 'react';
-import { ScrollView, View, TouchableOpacity } from 'react-native';
-
-// ! <-- NAVIGATION -->
-import { useNavigation } from '@react-navigation/native';
-
-// ! <-- GRAPHQL & APOLLO CLIENT -->
-import { useQuery } from '@apollo/client';
-import { GET_CUSTOMERS } from '../graphql/queries';
-
-// ! <-- COMPONENTS -->
+import { ScrollView, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import CustomerCard from '../components/CustomerCard';
-
-// ! <-- STYLING -->
 import tw from 'twrnc';
-import { Image, Input } from "@rneui/themed";
+import { Image, Input} from "@rneui/themed";
 import { Icon } from '@rneui/themed';
+import { useCustomers } from '../hooks/useCustomers';
 
-type Doc = {
-    email: string;
-    name: string;
-}
 
 const CustomersScreen = () => {
-
-    const navigation = useNavigation<CustomersScreenNavigationProp>();
-
     const [input, setInput] = useState<string>("");
-    const { loading, error, data } = useQuery(GET_CUSTOMERS);
     const inputRef = useRef<Input>();
 
-    
+    const { data, isLoading } = useCustomers();
 
     return (
-
         <View style={tw`h-full bg-[#59C1CC] px-3`}>
+
             <Image
                 containerStyle={tw`w-120 h-61 mx--8`}
                 source={{ uri: "https://links.papareact.com/3jc" }}
@@ -45,6 +25,7 @@ const CustomersScreen = () => {
                 ref={inputRef}
                 containerStyle={[
                     tw`bg-white pt-2 h-16 rounded-2xl z-50`,
+                    // customizable drop-shadow filter
                     {shadowColor: "#000",
                     shadowOffset: {
                         width: 0,
@@ -52,7 +33,6 @@ const CustomersScreen = () => {
                     },
                     shadowOpacity: 0.27,
                     shadowRadius: 4.65,
-
                     elevation: 6}
                 ]}
                 inputContainerStyle={tw`border-b-0`}
@@ -63,11 +43,11 @@ const CustomersScreen = () => {
                         style={tw`px-2`}
                     />
                 }
-                rightIcon={ input ? 
+                rightIcon={ input ?
                     <TouchableOpacity
                         onPress={() => {
                             inputRef.current.clear();
-                            setInput('');
+                            setInput("");
                         }}
                     >
                         <Icon 
@@ -76,26 +56,31 @@ const CustomersScreen = () => {
                             color='gray'
                         />   
                     </TouchableOpacity>
+
                     : <></>
                 }
                 placeholder="Search by customer"
                 value={input}
                 onChangeText={setInput}
             />
+
             <ScrollView 
                 showsVerticalScrollIndicator={false}
             >
-                {data?.getCustomers
-                    ?.filter((customer: CustomerList) => 
-                        customer.value.name.includes(input)
-                    )
-                    .map(({ name: ID, value: { email, name } }: CustomerResponse) => (
-                        <CustomerCard key={ID} email={email} name={name} userId={ID} />
+                {isLoading && 
+                    <ActivityIndicator/>
+                }
+
+                {data?.filter((customer: Customer) => (customer.name.includes(input)))
+                    .map((customer: Customer) => (
+                        <CustomerCard 
+                            key={customer.ID}
+                            ID={customer.ID} 
+                            name={customer.name}
+                            email={customer.email}
+                        />
                 ))}
-               
-                
             </ScrollView>
-            
             
         </View>
     )

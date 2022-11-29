@@ -1,41 +1,26 @@
-// ! IMPORTS 
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
-
-// ! <-- CUSTOM HOOKS --> 
-import useCustomerOrders from '../hooks/useCustomerOrders';
-
-// ! <-- NAVIGATION --> 
 import { useNavigation } from '@react-navigation/native';
-
-// ! <-- STYLING --> 
 import tw from 'twrnc';
-import { Card } from '@rneui/themed';
-import { Icon } from "@rneui/themed";
+import { Card, Icon } from '@rneui/themed';
+import { useCustomerOrders } from '../hooks/useCustomerOrders';
 
 
-type Props = {
-    email: string;
-    name: string;
-    userId: string;
-}
-
-const CustomerCard = ({ email, name, userId}: Props) => {
-
-    const { loading, error, orders } = useCustomerOrders(userId);
+const CustomerCard = (customer: Customer) => {
     const navigation = useNavigation<CustomersScreenNavigationProp>();
+    const { customerOrders } = useCustomerOrders(customer.ID);
 
     return (
         <TouchableOpacity
             onPress={() => {
-                if (orders.length) {
-                    navigation.navigate('Customer', {name: name, userId: userId})
+                if (customerOrders?.length) {
+                    navigation.navigate('Customer', {customerName: customer.name, customerID: customer.ID})
                 }
             }}
         >
             <Card 
-                containerStyle={[
-                    tw`rounded-xl`,
+                containerStyle={[tw`rounded-xl`,
+                    // customizable drop-shadow filter
                     {shadowColor: "#000",
                     shadowOffset: {
                         width: 0,
@@ -43,26 +28,22 @@ const CustomerCard = ({ email, name, userId}: Props) => {
                     },
                     shadowOpacity: 0.27,
                     shadowRadius: 4.65,
-
                     elevation: 6}
                 ]}>
+
 
                 <View style={tw`flex-row justify-between`}>
 
                     <View style={tw`flex-col justify-center`}>
-                        <Text style={tw`text-2xl font-bold`}>{name}</Text>
-                        <Text style={tw`text-sm`}>ID: {userId}</Text>
+                        <Text style={tw`text-2xl font-bold`}>{customer.name}</Text>
+                        <Text style={tw`text-sm`}>ID: {customer.ID}</Text>
                     </View>
 
                   
                     <View style={tw`flex-row items-center`}>
 
-                        <Text>
-                            {loading 
-                                ? "Loading..." 
-                                : orders.length ? <Text style={tw`font-bold`}>{ orders.length}x </Text> : <></>
-                            }
-                        </Text> 
+                        <Text style={tw`font-bold`}>{ customerOrders?.length }x </Text>
+                        
 
                         <Icon
                             style={tw``}

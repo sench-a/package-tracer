@@ -1,32 +1,18 @@
-// ! IMPORTS
 import React from 'react';
-
-// ! <-- NAVIGATION -->
 import { NavigationContainer } from '@react-navigation/native';
-
-// ! <-- COMPONENTS -->
 import RootNavigator from './navigator/RootNavigator';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-// ! <-- APOLLO CLIENT -->
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+const client = new QueryClient();
 
-
-
-const client = new ApolloClient({
-  uri: "http://localhost:5001/api/eponymous-kudu",
-  cache: new InMemoryCache(),
-});
-
-
-const App = () => {
+export default function App() {
   return (
-    <NavigationContainer>
-      <ApolloProvider client={client}>
-        <RootNavigator />
-      </ApolloProvider>
-    </NavigationContainer>
+    <QueryClientProvider client={client}>
+      <NavigationContainer>
+          <RootNavigator />
+      </NavigationContainer>
+    </QueryClientProvider>
   );
 }
-  
-export default App;
+
 

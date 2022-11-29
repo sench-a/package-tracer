@@ -1,46 +1,33 @@
 type Customer = {
-    email: string;
+	ID: string;
+	email: string;
     name: string;
-};
-
-type CustomerList = {
-    name: ID;
-    value: Customer;
-};
-
-type CustomerResponse = {
-    name: ID;
-    value: Customer;
-};
+}
 
 type Order = {
-    carrier: string;
-	createdAt: string;
-	shippingCost: number;
-	trackingId: string;
+	customerID: string;
 	Address: string;
 	City: string;
 	Lat: number;
 	Lng: number;
-	trackingItems: TrackingItem;
+	orderDate: string;
+	ID: string; 
 };
 
-type OrderResponse = {
-    value: Order;
-}
-
 type Item = {
-	item_id: ID;
+	ID: string;
 	name: string;
 	price: number;
 	quantity: number;
+	orderID: string;
+	customerID: string;
 };
 
-type TrackingItem = {
-	customer_id: ID;
-	items: Item[];
-	customers: Customer;
-};
+type RootStackParamList = {
+    Main: Customer | Order;
+    Customer: Customer;
+    Order: Order;
+}
 
 type CustomerScreenNavigationProp = CompositeNavigationProp<
     BottomTabNavigationProp<TabStackParamList>,

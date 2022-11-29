@@ -1,31 +1,19 @@
-// ! IMPORTS
 import React from 'react'
 import { View, Text, TouchableOpacity, FlatList } from 'react-native';
-
-// ! <-- NAVIGATION --> 
 import { useNavigation, useRoute } from '@react-navigation/native';
-
-// ! <-- CUSTOM HOOKS --> 
-import useCustomerOrders from '../hooks/useCustomerOrders'
-
-// ! <-- COMPONENTS --> 
 import DeliveryCard from '../components/DeliveryCard';
-
-// ! <-- STYLING --> 
 import tw from 'twrnc';
 import { Icon } from '@rneui/themed';
-
+import { useCustomerOrders } from '../hooks/useCustomerOrders';
 
 
 const CustomerScreen = () => {
-
     const navigation = useNavigation<CustomerScreenNavigationProp>();
-    const {params: {name, userId}} = useRoute<CustomerScreenRouteProp>();
-
-    const { loading, error, orders } = useCustomerOrders(userId);
+    const { params: { customerName, customerID }} = useRoute<CustomerScreenRouteProp>();
+    const { customerOrders } = useCustomerOrders(customerID);
 
     return (
-        <View style={tw`bg-white`}>
+        <View style={tw`bg-white h-full`}>
 
             <View style={tw`flex-col items-center pt-5 pb-2`}>
 
@@ -41,18 +29,23 @@ const CustomerScreen = () => {
                     />
                 </TouchableOpacity>
 
-                <Text style={tw`text-2xl font-bold`}>{name}</Text>
+                <Text style={tw`text-2xl font-bold`}>{customerName}</Text>
                 <Text style={tw`text-lg`}>Deliveries</Text>
                 
             </View>
 
-            <View style={tw`bg-white`}>
-                <FlatList
-                    data={orders}
-                    keyExtractor={order => order.trackingId}
-                    renderItem={({item: order}) => <DeliveryCard key={order.trackingId} order={order}/>}
-                />
-            </View>
+            {<FlatList
+                data={customerOrders}
+                keyExtractor={(item: Order) => item.ID}
+                renderItem={({item: order}) => 
+                    <DeliveryCard 
+                        key={order.ID}
+                        order={order}
+                        screen='customers'
+                    />}
+            />}
+            
+            
         </View>
     )
 }

@@ -1,58 +1,60 @@
-// ! IMPORTS
 import React from 'react'
 import { View, Text } from 'react-native'
-
-// ! <-- CUSTOM HOOKS --> 
-import useCustomerOrders from '../hooks/useCustomerOrders';
-
-// ! <-- MAPS --> 
 import MapView, { Marker } from 'react-native-maps';
-
-// ! <-- STYLING --> 
 import tw from 'twrnc';
-import { Card, Icon } from '@rneui/themed';
-import { Divider } from '@rneui/themed';
+import { Card, Icon, Divider } from '@rneui/themed';
+import useOrderedItems from '../hooks/useOrderedItems';
 
 
-
-type Props = {
-    order: Order;
-    fullHeight?: boolean;
+type DeliveryCardProps = {
+    order: Order
+    screen: string;
 }
 
-const DeliveryCard = ({ order, fullHeight }: Props) => {
-
-    const { loading, error, orders } = useCustomerOrders(order.trackingId);
+const DeliveryCard = ({ order, screen }: DeliveryCardProps) => {
+    const orderedItems = useOrderedItems(order.ID);
     
     return (
-        <Card containerStyle={tw`${fullHeight ? "bg-[#EB6A7C] rounded-xl" : "bg-[#59C1CC] rounded-xl border-white"}`}>
-            <View
-                style={fullHeight && { height: "90%" }}
-            >
-
+        <Card 
+            containerStyle={[
+                screen === 'customers' 
+                            ? tw`bg-[#59C1CC] rounded-xl border-[#59C1CC]` 
+                            : tw`bg-[#EB6A7C] rounded-xl border-[#EB6A7C]` , 
+                // customizable drop-shadow filter
+                {shadowColor: "#000",
+                shadowOffset: {
+                    width: 0,
+                    height: 3,
+                },
+                shadowOpacity: 0.27,
+                shadowRadius: 4.65,
+                elevation: 6}
+            ]}
+        >
+            <View>
                 <Icon
                     name='cube-outline'
                     type='ionicon'
                     size={45}
                 />
                 
-                <Text style={tw`text-center font-bold text-lg`}>Order ID: { order.trackingId }</Text>
-                <Text style={tw`text-center font-bold text-base`}>Ordered: {new Date(order.createdAt).toLocaleDateString('en-gb')}</Text>
+                <Text style={tw`text-center font-bold text-lg`}>Order ID: { order.ID }</Text>
+                <Text style={tw`text-center font-bold text-base`}>Ordered: {new Date(order.orderDate).toLocaleDateString('en-gb')}</Text>
                 <Text style={tw`mt-3 text-center font-bold text-lg`}>Shipping address: </Text>
                 <Text style={tw`mb-3 text-center text-base`}>{ order.Address }, { order.City }</Text>
 
                 <Divider color="black"/>
 
-                {order.trackingItems.items.map(item => (
+                {orderedItems?.map((item: Item) => (
                     <View style={tw`flex-row justify-center items-center my-2`}>
                         <Text style={tw`text-base italic mx-3`}>{item.name}</Text>
                         <Text style={tw`font-bold mt-0.5`}>x{item.quantity}</Text>
                     </View>
                 ))} 
                 
-                <View style={tw``}>
+                <View>
                     <MapView
-                        style={[tw`w-full mt-5 rounded-xl`, fullHeight ? { height: 450 } : { height: 200 } ]}
+                        style={[tw`w-full mt-5 rounded-xl`, { height: 200 } ]}
                         provider='google'
                         initialRegion={{
                             latitude: order.Lat,
@@ -73,11 +75,8 @@ const DeliveryCard = ({ order, fullHeight }: Props) => {
                         )}
                     </MapView>
                 </View>
-                
-
             </View> 
         </Card>
-        
     )
 }
 
