@@ -24,9 +24,9 @@ export const useCustomer = (customerID: string) => {
 }
 
 export const useCustomers = () => {
-    const { data, isLoading } = useQuery<Customer[]>(['customers'], fetcher);
+    const { data, isLoading, error } = useQuery<Customer[]>(['customers'], fetcher);
 
-    return { data, isLoading };
+    return { data, isLoading, error };
 }
 
 

@@ -11,7 +11,7 @@ const fetcher = async (): Promise<Order[]> => {
 }
 
 export const useOrders = () => {
-    const { data: orders, isLoading } = useQuery<Order[]>(['orders'], fetcher);
+    const { data: orders, isLoading, error } = useQuery<Order[]>(['orders'], fetcher);
 
-    return { orders, isLoading }; 
+    return { orders, isLoading, error }; 
 }

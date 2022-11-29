@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, ScrollView, ActivityIndicator } from 'react-native';
 import OrderCard from '../components/OrderCard';
 import tw from 'twrnc'
 import { Button, Image } from '@rneui/themed';
@@ -8,11 +8,12 @@ import { useOrders } from '../hooks/useOrders';
 
 const OrdersScreen = () => {
 
-  const { orders, isLoading } = useOrders();
+  const { orders, isLoading, error } = useOrders();
   const [ascending, setAscending] = useState<boolean>(true);
 
   return (
     <View style={tw`h-full bg-[#EB6A7C]`}>
+
       <View style={{
         shadowColor: "#000",
         shadowOffset: {
@@ -54,12 +55,17 @@ const OrdersScreen = () => {
         </Button>
       </View>
 
+      {isLoading 
+          ? <ActivityIndicator/>
+          : <></>
+      }
+
+      {error  
+          ? <Text>Unable to download data.</Text>
+          : <></>
+      }
+      
       <ScrollView style={tw`pt-3`}>
-
-        {isLoading && 
-          <ActivityIndicator/>
-        }
-
         {orders?.sort((a, b) => {
             if(ascending) {
               return new Date(a.orderDate) > new Date(b.orderDate) ? 1 : -1;
@@ -68,7 +74,6 @@ const OrdersScreen = () => {
             }})
           .map((order: Order) => <OrderCard key={order.ID} order={order}/>)
         }
-        
       </ScrollView>
     </View>
   )

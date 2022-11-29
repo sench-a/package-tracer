@@ -11,11 +11,11 @@ const fetcher = async (): Promise<Item[]> => {
 }
 
 const useOrderedItems = (orderID: string) => {
-    const { data } = useQuery<Item[]>(['ordered-items'], fetcher);
+    const { data, isLoading, error } = useQuery<Item[]>(['ordered-items'], fetcher);
 
-    const orderedItems = data?.filter((item: Item) => item.orderID == orderID);
+    const orderedItems = data?.filter((item: Item) => item.orderID === orderID);
 
-    return orderedItems;
+    return { orderedItems, isLoading, error };
 }
 
 export default useOrderedItems;

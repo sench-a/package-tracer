@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { ScrollView, View, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { ScrollView, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import CustomerCard from '../components/CustomerCard';
 import tw from 'twrnc';
 import { Image, Input} from "@rneui/themed";
@@ -11,7 +11,7 @@ const CustomersScreen = () => {
     const [input, setInput] = useState<string>("");
     const inputRef = useRef<Input>();
 
-    const { data, isLoading } = useCustomers();
+    const { data, isLoading, error } = useCustomers();
 
     return (
         <View style={tw`h-full bg-[#59C1CC] px-3`}>
@@ -64,13 +64,19 @@ const CustomersScreen = () => {
                 onChangeText={setInput}
             />
 
+            {isLoading 
+                ? <ActivityIndicator/>
+                : <></>
+            }
+
+            {error  
+                ? <Text>Unable to download data.</Text>
+                : <></>
+            }
+
             <ScrollView 
                 showsVerticalScrollIndicator={false}
             >
-                {isLoading && 
-                    <ActivityIndicator/>
-                }
-
                 {data?.filter((customer: Customer) => (customer.name.includes(input)))
                     .map((customer: Customer) => (
                         <CustomerCard 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, ActivityIndicator } from 'react-native'
 import MapView, { Marker } from 'react-native-maps';
 import tw from 'twrnc';
 import { Card, Icon, Divider } from '@rneui/themed';
@@ -12,7 +12,7 @@ type DeliveryCardProps = {
 }
 
 const DeliveryCard = ({ order, screen }: DeliveryCardProps) => {
-    const orderedItems = useOrderedItems(order.ID);
+    const { orderedItems, isLoading, error } = useOrderedItems(order.ID);
     
     return (
         <Card 
@@ -44,6 +44,16 @@ const DeliveryCard = ({ order, screen }: DeliveryCardProps) => {
                 <Text style={tw`mb-3 text-center text-base`}>{ order.Address }, { order.City }</Text>
 
                 <Divider color="black"/>
+
+                {isLoading 
+                    ? <ActivityIndicator/>
+                    : <></>
+                }
+
+                {error  
+                    ? <Text>Unable to download data.</Text>
+                    : <></>
+                }
 
                 {orderedItems?.map((item: Item) => (
                     <View style={tw`flex-row justify-center items-center my-2`}>

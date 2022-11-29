@@ -1,0 +1,33 @@
+{
+    "customers": [
+        {
+            "ID": "-N6rOmxa7vOOTpZZSllL",
+            "name": "Lucas Bill",
+            "emai": "lucal.bill@example.com"
+        },
+
+        {
+            "ID": "-N6rQgCkbLPB1xElUchT",
+            "name": "Mandy Jones",
+            "emai": "mandy.jones@example.com"
+        },
+
+        {
+            "ID": "-N6rSJ4xI3_Cq7u58Wh_",
+            "name": "Salim Ali",
+            "emai": "salim.ali@example.com"
+        },
+
+        {
+            "ID": "-N6rSZB4AoMAwrDnm2jF",
+            "name": "Jane Xiu",
+            "emai": "jane.xiu@example.com"
+        },
+
+        {
+            "ID": "-N6rTRzW_JrkHQMdt5QA",
+            "name": "John Doe",
+            "emai": "john.doe@example.com"
+        }
+    ]
+}
