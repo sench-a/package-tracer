@@ -15,12 +15,10 @@ type Order = {
 };
 
 type Item = {
-	ID: string;
 	name: string;
 	price: number;
 	quantity: number;
 	orderID: string;
-	customerID: string;
 };
 
 type RootStackParamList = {

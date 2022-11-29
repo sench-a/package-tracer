@@ -10,6 +10,8 @@ const CustomerCard = (customer: Customer) => {
     const navigation = useNavigation<CustomersScreenNavigationProp>();
     const { customerOrders } = useCustomerOrders(customer.ID);
 
+    console.log(customerOrders)
+
     return (
         <TouchableOpacity
             onPress={() => {

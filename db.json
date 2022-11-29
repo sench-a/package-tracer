@@ -35,8 +35,8 @@
         {
             "ID": "1Z881F5V0397269080",
             "address": "123 Main St, San Francisco",
-            "lat": 37.7749295,
-            "lng": -122.4194155,
+            "lat": "37.7749295",
+            "lng": "-122.4194155",
             "orderDate": "2022-08-04",
             "customerID": "-N6rOmxa7vOOTpZZSllL"
         },
@@ -44,8 +44,8 @@
         {
             "ID": "1Z4V180W0324616505",
             "address": "39 Long Beach, Los Angeles",
-            "lat": 33.769327,
-            "lng": -118.192395,
+            "lat": "33.769327",
+            "lng": "-118.192395",
             "orderDate": "2022-08-01",
             "customerID": "-N6rQgCkbLPB1xElUchT"
         },
@@ -53,17 +53,17 @@
         {
             "ID": "1ZCL1F5V0397269023",
             "address": "Union Square, San Francisco",
-            "lat": 37.78608,
-            "lng": -122.41171,
+            "lat": "37.78608",
+            "lng": "-122.41171",
             "orderDate": "2022-09-15",
-            "customerID": "-N6rQgCkbLPB1xElUchT"
+            "customerID": "-N6rSJ4xI3_Cq7u58Wh_"
         },
 
         {
             "ID": "1ZS31F5V039722343",
             "address": "Santa Clara, San Jose",
-            "lat": 37.350755,
-            "lng": -121.95648,
+            "lat": "37.350755",
+            "lng": "-121.95648",
             "orderDate": "2022-10-05",
             "customerID": "-N6rQgCkbLPB1xElUchT"
         },
@@ -71,10 +71,10 @@
         {
             "ID": "1ZS31F5V0397294994",
             "address": "Brooklyn, New York",
-            "lat": 40.671505,
-            "lng": -73.941563,
+            "lat": "40.671505",
+            "lng": "-73.941563",
             "orderDate": "2022-11-01",
-            "customerID": "-N6rQgCkbLPB1xElUchT"
+            "customerID": "-N6rSZB4AoMAwrDnm2jF"
         }
     ],
 
@@ -87,7 +87,7 @@
         },
 
         {
-            "orderID": "1Z4V180W0324616505",
+            "orderID": "1Z881F5V0397269080",
             "item": "iPad Pro 1TB",
             "price": 1799,
             "quantity": 1  
