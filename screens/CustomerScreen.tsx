@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import DeliveryCard from '../components/DeliveryCard';
 import tw from 'twrnc';
@@ -34,17 +34,17 @@ const CustomerScreen = () => {
                 
             </View>
 
-            {<FlatList
-                data={customerOrders}
-                keyExtractor={(item: Order) => item.customerID}
-                renderItem={({item: order}) => 
-                    <DeliveryCard 
-                        key={order.ID}
-                        order={order}
-                        screen='customers'
-                    />}
-            />}
-            
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+            >
+                {customerOrders?.map((order: Order) => (
+                        <DeliveryCard 
+                            key={order.ID}
+                            order={order}
+                            screen='customers'
+                        />
+                ))}
+            </ScrollView>
             
         </View>
     )
