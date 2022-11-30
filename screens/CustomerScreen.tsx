@@ -36,7 +36,7 @@ const CustomerScreen = () => {
 
             {<FlatList
                 data={customerOrders}
-                keyExtractor={(item: Order) => item.ID}
+                keyExtractor={(item: Order) => item.customerID}
                 renderItem={({item: order}) => 
                     <DeliveryCard 
                         key={order.ID}
