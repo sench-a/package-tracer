@@ -15,7 +15,7 @@ type Order = {
 };
 
 type Item = {
-	name: string;
+	item: string;
 	price: number;
 	quantity: number;
 	orderID: string;

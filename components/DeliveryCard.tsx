@@ -19,7 +19,7 @@ const DeliveryCard = ({ order, screen }: DeliveryCardProps) => {
             containerStyle={[
                 screen === 'customers' 
                             ? tw`bg-[#59C1CC] rounded-xl border-[#59C1CC]` 
-                            : tw`bg-[#EB6A7C] rounded-xl border-[#EB6A7C]` , 
+                            : tw`bg-[#EB6A7C] rounded-xl border-[#EB6A7C]`, 
                 // customizable drop-shadow filter
                 {shadowColor: "#000",
                 shadowOffset: {
@@ -38,10 +38,18 @@ const DeliveryCard = ({ order, screen }: DeliveryCardProps) => {
                     size={45}
                 />
                 
-                <Text style={tw`text-center font-bold text-lg`}>Order ID: { order.ID }</Text>
-                <Text style={tw`text-center font-bold text-base`}>Ordered: {new Date(order.orderDate).toLocaleDateString('en-gb')}</Text>
-                <Text style={tw`mt-3 text-center font-bold text-lg`}>Shipping address: </Text>
-                <Text style={tw`mb-3 text-center text-base`}>{ order.address }</Text>
+                <Text style={tw`text-center font-bold text-lg`}>
+                    Order ID: { order.ID }
+                </Text>
+                <Text style={tw`text-center font-bold text-base`}>
+                    Ordered: {new Date(order.orderDate).toLocaleDateString('en-gb')}
+                </Text>
+                <Text style={tw`mt-3 text-center font-bold text-lg`}>
+                    Shipping address: 
+                </Text>
+                <Text style={tw`mb-3 text-center text-base`}>
+                    { order.address }
+                </Text>
 
                 <Divider color="black"/>
 
@@ -57,8 +65,8 @@ const DeliveryCard = ({ order, screen }: DeliveryCardProps) => {
 
                 {orderedItems?.map((item: Item) => (
                     <View style={tw`flex-row justify-center items-center my-2`}>
-                        <Text style={tw`text-base italic mx-3`}>{item.name}</Text>
-                        <Text style={tw`font-bold mt-0.5`}>x{item.quantity}</Text>
+                        <Text style={tw`text-base italic mx-3`}>{ item.item }</Text>
+                        <Text style={tw`font-bold mt-0.5`}>x{ item.quantity }</Text>
                     </View>
                 ))} 
                 

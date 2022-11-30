@@ -10,8 +10,6 @@ const CustomerCard = (customer: Customer) => {
     const navigation = useNavigation<CustomersScreenNavigationProp>();
     const { customerOrders } = useCustomerOrders(customer.ID);
 
-    console.log(customerOrders)
-
     return (
         <TouchableOpacity
             onPress={() => {
@@ -44,11 +42,12 @@ const CustomerCard = (customer: Customer) => {
                   
                     <View style={tw`flex-row items-center`}>
 
-                        <Text style={tw`font-bold`}>{ customerOrders?.length }x </Text>
+                        { customerOrders?.length 
+                            ? <Text style={tw`font-bold`}> { customerOrders.length }x </Text>
+                            : <></>
+                        }
                         
-
                         <Icon
-                            style={tw``}
                             name="cube-outline"
                             type="ionicon"
                             size={50}

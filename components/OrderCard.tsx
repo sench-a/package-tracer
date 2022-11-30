@@ -12,7 +12,7 @@ type OrderCardProps = {
 
 const OrderCard = ({ order }: OrderCardProps) => {
     const navigation = useNavigation<OrdersScreenNavigationProp>();
-    const orderedItems = useOrderedItems(order.ID)
+    const { orderedItems } = useOrderedItems(order.ID)
 
     return (
         <TouchableOpacity
@@ -22,6 +22,7 @@ const OrderCard = ({ order }: OrderCardProps) => {
         >
             <Card containerStyle={[
                 tw`rounded-xl`,
+                // customizable drop-shadow filter
                 {shadowColor: "#000",
                 shadowOffset: {
                     width: 0,
@@ -36,11 +37,11 @@ const OrderCard = ({ order }: OrderCardProps) => {
                     <View style={tw`flex-row justify-between`}>
 
                         <View style={tw`flex-col`}>
-                            <Text style={tw`text-lg font-bold`}>ID: {order.ID}</Text>
+                            <Text style={tw`text-lg font-bold`}>ID: { order.ID }</Text>
                         </View> 
                         
                         <View style={tw`flex-row items-center mt--1.5`}>
-                            <Text style={tw`font-bold`}>{orderedItems?.length}x</Text>
+                            <Text style={tw`font-bold`}>{ orderedItems?.length }x</Text>
                             <Icon
                                 name="cart-outline"
                                 type="ionicon"
